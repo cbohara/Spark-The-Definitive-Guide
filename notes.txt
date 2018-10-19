@@ -103,3 +103,25 @@ Action
 		view data in the console
 		collect data to native objects
 		write to output data sources
+
+End-to-End Example
+	use DataFrame reader assoc with SparkSession to read in data
+		schema inference = ask Spark to figure out schema
+		header = true specifies first row is a header not data
+	each resulting DataFrame has a set of columns with unspecified # of rows
+		reading data = transformation = lazy evaluation
+		Spark only took a peek at a couple rows to guess schema
+	explain()
+		usedful for debugging
+		top - end result
+		bottom - data sources
+	shuffle partitions
+		by default Spark will output 200 shuffle partitions
+		overkill for this example
+		spark.conf.set("spark.sql.shuffle.partitions", "5")
+
+DataFrames and SQL
+	 no performance difference between writing SQL queries or writing DataFrame code
+	allows you to query data using SQL
+	createOrReplaceTempView
+		make DataFrame into a table or view
